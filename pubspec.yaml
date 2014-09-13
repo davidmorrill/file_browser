@@ -1,0 +1,7 @@
+name: file_browser
+author: David C. Morrill
+description: A client/server application for browsing files on the server.
+dependencies:
+  browser: any
+  http_server: any
+  path: any

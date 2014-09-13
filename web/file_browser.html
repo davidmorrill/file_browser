@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, user-scalable=no">
+    <title>File browser</title>
+
+    <script async type="application/dart" src="file_browser.dart"></script>
+    <script async src="packages/browser/dart.js"></script>
+
+    <link rel="stylesheet" href="file_browser.css">
+    <link rel="stylesheet" href="icons.css">
+  </head>
+  <body>
+    <div id="filebrowser"></div>
+    <div id='filecontent'>
+      <div id='tabswrapper'>
+        <div id='tabs'></div>
+      </div>
+      <div id='fileinfo'>
+        <div id="filteropen" class="icon-filter iconbutton"
+             title="Click to open/close file filter tool bar"></div>
+        <div id="searchopen" class="icon-search iconbutton"
+             title="Click to open/close content search tool bar"></div>
+        <div id="fileinfotext">
+          Click directory or file on left side to display, click filter or
+          search icons to toggle tool bars
+        </div>
+      </div>
+      <div id='filetext'>
+        <div id='file1'></div>
+        <div id='file2'></div>
+      </div>
+    </div>
+    <div class="tools">
+      <div class="tool left">
+        <input id="filter" type="search" placeholder="Files matching..."
+               title=" The text to search for in a file name">
+        <span id="filterregex"
+              title=" Is the file filter a regular expression? ">
+          Regex
+        </span>
+        <span id="filtercase" title=" Is the file filter case sensitive? ">
+          Case
+        </span>
+      </div>
+      <div class="tool right">
+        <input id="search" type="search" placeholder="Lines matching..."
+               autofocus="autofocus"
+               title=" The text or regular expression to search for ">
+        <span id="regex" title=" Is the search string a regular expression? ">
+          Regex
+        </span>
+        <span id="case" title=" Is the search case sensitive? ">
+          Case
+        </span>
+        <span id="infiles"
+              title=" Should search include all files in current directory? ">
+          Files
+        </span>
+        <label title=" Number of context lines to display ">
+          &nbsp;&nbsp;Context:
+        </label>
+        <input id="context" type="range" min="-1" max="9" step ="1" value ="1"
+               title=" Number of context lines to display "/>
+        <label id="context2" title=" Number of context lines to display ">
+          1
+        </label>
+        <span id="contextTop" class="checked"
+              title="Show context lines above each match?">
+          T
+        </span>
+        <span id="contextBottom" class="checked"
+              title="Show context lines below each match?">
+          B
+        </span>
+      </div>
+    </div>
+  </body>
+</html>

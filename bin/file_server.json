@@ -1,0 +1,15 @@
+{
+  "host": "127.0.0.1",
+  "port": 8090,
+  "expiration": 10,
+  "types": [
+    ".bat", ".c", ".coffee", ".cpp", ".css", ".dart", ".h", ".hpp", ".htm",
+    ".html", ".java", ".js", ".json", ".less", ".md", ".py", ".rb", ".sass",
+    ".scss", ".styl", ".txt", ".xml", ".yaml"
+  ],
+  "roots": [
+    "..",
+    "/Users/dmorrill/Dart/dart-sdk",
+    "/Users/dmorrill/Dropbox/github/facets"
+  ]
+}

@@ -1,0 +1,338 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #444243;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.2em;
+  overflow: hidden;
+}
+#filebrowser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 75%;
+  bottom: 0;
+  xxbottom: 41px;
+  border-left: 1px solid #4c4c4c;
+}
+#filecontent {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 0;
+  bottom: 0;
+  xxbottom: 41px;
+  border-left: 1px solid #c39f05;
+  border-right: 1px solid #333;
+  background: #363535;
+  color: #c0c0c0;
+}
+#tabswrapper {
+  height: 28px;
+  width: 100%;
+  color: #c39f05;
+  overflow-y: hidden;
+}
+#tabs {
+  height: calc(28px + 20px);
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.tab {
+  position: relative;
+  display: inline-block;
+  min-width: 100px;
+  height: calc(28px - 1px);
+  line-height: calc(28px - 2px);
+  background: #999;
+  color: #111;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 0 6px;
+  margin: 1px 0 0 2px;
+  transition: background 0.3s;
+}
+.tabselected {
+  background: #c39f05;
+  color: #363535;
+}
+.tabname {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.close {
+  opacity: 0;
+  position: absolute;
+  top: calc((28px/2) - 9px);
+  right: 5px;
+  transition: opacity 0.3s;
+}
+.tab:hover {
+  background: #5a88a8;
+  color: #111;
+}
+.tab:hover .close {
+  opacity: 1;
+}
+#fileinfo {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 32px;
+  background: #c39f05;
+  color: #363535;
+  padding: 3px 5px;
+  width: 100%;
+  font-size: 0.9em;
+}
+#fileinfotext {
+  line-height: 32px;
+  text-align: center;
+  flex-grow: 1;
+}
+.iconbutton {
+  line-height: 32px;
+  padding: 6px 6px 0 6px;
+  margin-right: 8px;
+  border-radius: 13px;
+  border: 1px solid #444243;
+  transition: background 0.4s, color 0.4s;
+  color: #c39f05;
+  background-color: #444243;
+}
+.iconbutton.checked {
+  color: #111;
+  background-color: #d0d0d0;
+}
+.iconbutton:hover,
+.iconbutton.checked:hover {
+  color: #111;
+  background-color: #5a88a8;
+}
+#filetext {
+  position: relative;
+  height: calc(100% - 60px);
+  overflow: hidden;
+}
+#file1,
+#file2 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#file1 {
+  transform: translate(100%, 0);
+  transition: transform 0.35s ease-out;
+}
+#file2 {
+  transform: translate(0, 0);
+  transition: transform 0.35s ease-out;
+}
+#file1.prescroll {
+  transform: translate(0, 0);
+  transition: transform;
+}
+#file2.prescroll {
+  transform: translate(-100%, 0);
+  transition: transform;
+}
+.tools {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 70px;
+  xxbottom: 6px;
+  height: 88px;
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+}
+.tool {
+  position: absolute;
+  height: 41px;
+  font-size: 0.9em;
+  background: #2c2829;
+  border-top: 1px solid #c39f05;
+  border-bottom: 1px solid #c39f05;
+  border-right: 8px solid #c39f05;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  white-space: nowrap;
+  padding-top: 9px;
+  padding-right: 10px;
+  overflow: hidden;
+  pointer-events: auto;
+  transform: translate(calc(-100% + 8px), 0);
+  transition: transform 0.35s ease-out 0.5s;
+}
+.tool input,
+.tool label,
+.tool span {
+  color: #c39f05;
+  vertical-align: middle;
+}
+.tool input {
+  margin-left: 10px;
+}
+.tool label {
+  margin-left: 4px;
+}
+.tool span {
+  display: inline-block;
+  border-radius: 10px;
+  background: #555;
+  padding: 2px 7px;
+  margin-left: 5px;
+  cursor: default;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: background 0.4s, color 0.4s;
+}
+.tool span.checked {
+  background: #c39f05;
+  color: #111;
+}
+.tool span:hover,
+.tool span.checked:hover {
+  background: #5a88a8;
+  color: #111;
+}
+.tool #context {
+  margin-left: 4px;
+  width: 62px;
+}
+.tool #search,
+.tool #filter {
+  background: #555;
+  color: #b59405;
+  width: 250px;
+  outline: 0;
+  border: 0;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.tool #search:focus,
+.tool #filter:focus {
+  background: #e8e8e8;
+}
+.tool #search.error,
+.tool #filter.error {
+  background: #ff858f;
+  color: #111;
+}
+#context2 {
+  display: inline-block;
+  width: 22px;
+  text-align: center;
+  border: 1px solid #c39f05;
+  border-radius: 10px;
+  background: #555;
+}
+.left {
+  top: 0;
+}
+.right {
+  bottom: 0;
+}
+.tool:hover,
+.tool:active,
+.tool.open {
+  transform: translate(0, 0);
+  transition: transform 0.35s ease-out;
+}
+.directories,
+.files {
+  height: 50%;
+  overflow: auto;
+  border-left: 1px solid #4c4c4c;
+  border-top: 1px solid #4c4c4c;
+  border-right: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+.directories {
+  border-bottom: 1px solid #c39f05;
+}
+.item {
+  padding: 3px 10px;
+  border-top: 1px solid #4c4c4c;
+  border-bottom: 1px solid #333;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.item:hover {
+  background: #5a88a8;
+  color: #111;
+}
+.directory,
+.child,
+.file {
+  background: #363535;
+  color: #c39f05;
+}
+.selected {
+  background: #c39f05;
+  color: #000;
+}
+.textline {
+  width: 100%;
+  line-height: 1em;
+  border-top: 1px solid #4c4c4c;
+  border-bottom: 1px solid #333;
+}
+.textline:nth-child(5n) .linenumber {
+  color: #c39f05;
+}
+.textline:last-child {
+  border-bottom: 1px solid last-line-color;
+}
+.linenumber {
+  display: inline-block;
+  width: 44px;
+  height: 100%;
+  color: #5f8fb1;
+  font-size: 75%;
+  text-align: right;
+  vertical-align: middle;
+  padding: 3px 5px;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.linetext {
+  display: inline-block;
+  width: calc(100% - 44px);
+  height: 100%;
+  border-left: 1px solid #555;
+  font-family: Consolas, "Lucida Console", Inconsolata, Menlo, monospace;
+  background: #444243;
+  vertical-align: middle;
+  white-space: pre;
+  padding: 3px 5px;
+}
+.startGroup {
+  border-top: 2px solid #c39f05;
+}
+.endGroup {
+  border-bottom: 2px solid #c39f05;
+}
+.match {
+  color: #ffd106;
+}

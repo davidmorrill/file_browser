@@ -1,0 +1,366 @@
+//------------------------------------------------------------------------------
+// Global color constants:
+//------------------------------------------------------------------------------
+
+top-left-border        = #4C4C4C  // Color of border-top/border-left
+bottom-right-border    = #333333  // Color of border-bottom/border-right
+line-border            = #555555  // Color of content line left border
+last-line-border       = #555555  // Color of last content line bottom border
+background-color       = #444243  // Background color of page and text lines
+linenumber-text-color  = #5F8FB1  // Color of line number text
+match-text-color       = #FFD106  // Color of search match text
+title-text-color       = #C39F05  // File title text color
+title-color            = #363535  // Title/line number background color
+info-text-color        = #363535  // Information area background color
+info-color             = #C39F05  // Information area text color
+selected-color         = #C39F05  // Selected directory/file background color
+selected-text-color    = #000000  // Selected directory/file text color
+active-icon-color      = #D0D0D0  // Activated icon background color
+hover-color            = #5A88A8  // File browser item hover background color
+hover-text-color       = #111111  // File browser item hover text color
+highlight-text-color   = #C39F05  // Highlighted line number text color
+file-text-color        = #C39F05  // File/directory item text color
+file-color             = #363535  // File/directory item background color
+content-text-color     = #C0C0C0  // File content text color
+tools-color            = #555555  // Tools section control background color
+tools-bgcolor          = #2C2829  // Tools section background color
+search-color           = #E8E8E8  // Search/filter active background color
+search-text-color      = #B59405  // Search/filter text color
+error-color            = #FF858F  // Search/filter error state background color
+tab-color              = #999999  // Tab background color
+
+//------------------------------------------------------------------------------
+// Other global constants:
+//------------------------------------------------------------------------------
+
+highlight-count  = 5         // Highlighted line number interval size
+browser-width    = 25%       // Width of file browser section on left
+linenumber-width = 44px      // Width of line number area
+tabs-height      = 28px      // Height of the tabs bar area
+info-height      = 32px      // Height of the file information area
+tool-height      = 41px      // Height of the tool section
+line-padding     = 3px 5px   // Padding around line numbers and line text
+file-padding     = 3px 10px  // Padding around directory/file items
+
+//------------------------------------------------------------------------------
+// Helper functions:
+//------------------------------------------------------------------------------
+
+border1(color)
+  1px solid color
+
+//------------------------------------------------------------------------------
+// Style rules:
+//------------------------------------------------------------------------------
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+body
+  position: relative
+  width: 100vw
+  height: 100vh
+  background: background-color
+  font-family: 'Open Sans', sans-serif
+  font-size: 14px
+  font-weight: normal
+  line-height: 1.2em
+  overflow: hidden
+
+#filebrowser
+  position: absolute
+  top: 0
+  left: 0
+  right: 100% - browser-width
+  bottom: 0
+  xxbottom: tool-height
+  border-left: border1( top-left-border )
+
+#filecontent
+  position: absolute
+  top: 0
+  left: browser-width
+  right: 0
+  bottom: 0
+  xxbottom: tool-height
+  border-left: border1( highlight-text-color )
+  border-right: border1( bottom-right-border )
+  background: title-color
+  color: content-text-color
+
+#tabswrapper
+  height: tabs-height
+  width: 100%
+  color: title-text-color
+  overflow-y: hidden
+
+#tabs
+  height: "calc(%s + 20px)" % tabs-height
+  width: 100%
+  overflow-x: scroll
+  white-space: nowrap
+
+.tab
+  position: relative
+  display: inline-block
+  min-width: 100px
+  height: "calc(%s - 1px)" % tabs-height
+  line-height: "calc(%s - 2px)" % tabs-height
+  background: tab-color
+  color: hover-text-color
+  border-top-left-radius: 5px
+  border-top-right-radius: 5px
+  padding: 0 6px
+  margin: 1px 0 0 2px
+  transition: background 0.3s
+
+.tabselected
+  background: title-text-color
+  color: title-color
+
+.tabname
+  display: inline-block
+  width: 100%
+  text-align: center
+  -webkit-user-select: none
+  user-select: none
+  cursor: default
+
+.close
+  opacity: 0
+  position: absolute
+  top: "calc((%s/2) - 9px)" % tabs-height
+  right: 5px
+  transition: opacity 0.3s
+
+.tab:hover
+  background: hover-color
+  color: hover-text-color
+  .close
+    opacity: 1
+
+#fileinfo
+  display: flex
+  flex-flow: row nowrap
+  height: info-height
+  background: info-color
+  color: info-text-color
+  padding: 3px 5px
+  width: 100%
+  font-size: 0.9em
+
+#fileinfotext
+  line-height: info-height
+  text-align: center
+  flex-grow: 1
+
+.iconbutton
+  line-height: info-height
+  padding: 6px 6px 0 6px
+  margin-right: 8px
+  border-radius: 13px
+  border: border1( background-color )
+  transition: background 0.4s, color 0.4s
+  color: title-text-color
+  background-color: background-color
+  &.checked
+    color: hover-text-color
+    background-color: active-icon-color
+  &:hover, &.checked:hover
+    color: hover-text-color
+    background-color: hover-color
+
+#filetext
+  position: relative
+  height: "calc(100% - %s)" % (tabs-height + info-height)
+  overflow: hidden
+
+#file1, #file2
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  overflow-y: auto
+  overflow-x: hidden
+
+#file1
+  transform: translate(100%,0)
+  transition: transform 0.35s ease-out
+
+#file2
+  transform: translate(0,0)
+  transition: transform 0.35s ease-out
+
+#file1.prescroll
+  transform: translate(0,0)
+  transition: transform
+
+#file2.prescroll
+  transform: translate(-100%,0)
+  transition: transform
+
+.tools
+  position: absolute
+  left: 0
+  right: 0
+  top: tabs-height + info-height + 10
+  xxbottom: 6px
+  height: 2 * tool-height + 6
+  white-space: nowrap
+  overflow: hidden
+  pointer-events: none
+
+.tool
+  position: absolute
+  height: tool-height
+  font-size: 0.9em
+  background: tools-bgcolor
+  border-top: border1( highlight-text-color )
+  border-bottom: border1( highlight-text-color )
+  border-right: 8px solid highlight-text-color
+  border-top-right-radius: 8px
+  border-bottom-right-radius: 8px
+  white-space: nowrap
+  padding-top: 9px
+  padding-right: 10px
+  overflow: hidden
+  pointer-events: auto
+  transform: translate(calc(-100% + 8px),0)
+  transition: transform 0.35s ease-out 0.5s
+  input, label, span
+    color: title-text-color
+    vertical-align: middle
+  input
+    margin-left: 10px
+  label
+    margin-left: 4px
+  span
+    display: inline-block
+    border-radius: 10px
+    background: tools-color
+    padding: 2px 7px
+    margin-left: 5px
+    cursor: default
+    -webkit-user-select: none
+    user-select: none
+    transition: background 0.4s, color 0.4s
+  span.checked
+    background: title-text-color
+    color: hover-text-color
+  span:hover, span.checked:hover
+    background: hover-color
+    color: hover-text-color
+  #context
+    margin-left: 4px
+    width: 62px
+  #search, #filter
+    background: tools-color
+    color: search-text-color
+    width: 250px
+    outline: 0
+    border: 0
+    padding: 4px 8px
+    border-radius: 10px
+    font-weight: bold
+  #search:focus, #filter:focus
+    background: search-color
+  #search.error, #filter.error
+    background: error-color
+    color: hover-text-color
+
+#context2
+  display: inline-block
+  width: 22px
+  text-align: center
+  border: border1( title-text-color )
+  border-radius: 10px
+  background: tools-color
+
+.left
+  top: 0
+
+.right
+  bottom: 0
+
+.tool:hover, .tool:active, .tool.open
+  transform: translate(0,0)
+  transition: transform 0.35s ease-out
+
+.directories, .files
+  height: 50%
+  overflow: auto
+  border-left: border1( top-left-border )
+  border-top: border1( top-left-border )
+  border-right: border1( bottom-right-border )
+  border-bottom: border1( bottom-right-border )
+
+.directories
+  border-bottom: border1( highlight-text-color )
+
+.item
+  padding: file-padding
+  border-top: border1( top-left-border )
+  border-bottom: border1( bottom-right-border )
+  -webkit-user-select: none
+  user-select: none
+  cursor: pointer
+
+.item:hover
+  background: hover-color
+  color: hover-text-color
+
+.directory, .child, .file
+  background: file-color
+  color: file-text-color
+
+.selected
+  background: selected-color
+  color: selected-text-color
+
+.textline
+  width: 100%
+  line-height: 1em
+  border-top: border1( top-left-border )
+  border-bottom: border1( bottom-right-border )
+
+.textline:nth-child({highlight-count}n) .linenumber
+  color: highlight-text-color
+
+.textline:last-child
+  border-bottom: border1( last-line-color )
+
+.linenumber
+  display: inline-block
+  width: linenumber-width
+  height: 100%
+  color: linenumber-text-color
+  font-size: 75%
+  text-align: right
+  vertical-align: middle
+  padding: line-padding
+  -webkit-user-select: none
+  user-select: none
+  cursor: default
+
+.linetext
+  display: inline-block
+  width: "calc(100% - %s)" % linenumber-width
+  height: 100%
+  border-left: border1( line-border )
+  font-family: Consolas, "Lucida Console", Inconsolata, Menlo, monospace
+  background: background-color
+  vertical-align: middle
+  white-space: pre
+  padding: line-padding
+
+.startGroup
+  border-top: 2px solid highlight-text-color
+
+.endGroup
+  border-bottom: 2px solid highlight-text-color
+
+.match
+  color: match-text-color
