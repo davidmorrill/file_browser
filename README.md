@@ -21,7 +21,17 @@ The app is divided into two parts:
   located in the file system directory hierarchies exposed by the web server's
   REST API.
 
-A screen shot of the web app running under Dartium is show below:
+Some screen shots of the web app running under Dartium are show below:
+
+![File Browser 1](https://cloud.githubusercontent.com/assets/213759/4261801/da0a45ae-3b7e-11e4-9a3b-3c2026c8d10f.png)
+
+![File Browser 2](https://cloud.githubusercontent.com/assets/213759/4261799/da07df4e-3b7e-11e4-9394-2bcebb3a400a.png)
+
+![File Browser 3](https://cloud.githubusercontent.com/assets/213759/4261800/da0a379e-3b7e-11e4-881d-3494c85ab9eb.png)
+
+![File Browser 4](https://cloud.githubusercontent.com/assets/213759/4261798/da063496-3b7e-11e4-8df3-1fd71e0e21c0.png)
+
+![File Browser 5](https://cloud.githubusercontent.com/assets/213759/4261802/da0c2c2a-3b7e-11e4-9a88-30b1b11b8469.png)
 
 The app view is divided into three sections:
 
