@@ -8,7 +8,6 @@
 //
 //------------------------------------------------------------------------------
 // TODO: Look into supporting github source code repositories as a proxy server
-// TODO: Discard non-existent root directories with a warning message
 //------------------------------------------------------------------------------
 
 //-- Imports -------------------------------------------------------------------
@@ -23,7 +22,6 @@ import 'package:http_server/http_server.dart';
 //-- Constants -----------------------------------------------------------------
 
 // The host and port to bind to:
-//String host = '10.0.0.6';
 String host = '127.0.0.1';
 int port    = 8090;
 
@@ -243,8 +241,6 @@ String _getParameter ( HttpRequest request, String name ) {
 
 //-- Finder Class --------------------------------------------------------------
 
-int searchCacheHits1 = 0;  // DEBUG
-int searchCacheHits2 = 0;  // DEBUG
 typedef bool Matcher( String item );
 
 class Finder {
@@ -322,28 +318,19 @@ class Finder {
     if ( values != null ) {
 
       // If the cache value has not yet expired, return the cached match value:
-      if ( now.isBefore( values[0] ) ) {
-        searchCacheHits1++;
-        return values[2];
-      }
+      if ( now.isBefore( values[0] ) ) return values[2];
 
       // Otherwise if the file time stamp has not changed, we can update the
       // cache entry and return the original match result:
       stat = FileStat.statSync( file );
       if ( values[1] == stat.modified ) {
         values[0] = now.add( searchExpiration );
-        searchCacheHits2++;
         return values[2];
       }
     } else {
       stat   = FileStat.statSync( file );
       values = new List( 3 );
       searchCache[ key ] = values;
-      if ( (searchCache.length % 100) == 0 ) {
-        print( 'cache size: ${searchCache.length} '
-               'hits1: $searchCacheHits1 '
-               'hits2: $searchCacheHits2' );
-      }
       // TODO: Implement cache size check here...
     }
 
