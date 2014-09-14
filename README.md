@@ -90,10 +90,11 @@ default contents of the file are:
     {
       "host": "127.0.0.1",
       "port": 8090,
+      "expiration": 10,
       "types": [
         ".bat", ".c", ".coffee", ".cpp", ".css", ".dart", ".h", ".hpp", ".htm",
-        ".html", ".java", ".js", ".json", ".less", ".py", ".rb", ".sass", ".scss",
-        ".styl", ".txt", ".xml", ".yaml"
+        ".html", ".java", ".js", ".json", ".less", ".md", ".py", ".rb", ".sass",
+        ".scss", ".styl", ".txt", ".xml", ".yaml"
       ],
       "roots": [
         ".."
@@ -104,6 +105,7 @@ where:
 
 - **host**: The host name or IP address to use.
 - **port**: The TCP port to use.
+- **expiration**: How long, in minutes, content search results are cached.
 - **types**: The list of text file extensions to serve.
 - **roots**: The list of root directories to serve. More than one directory can
   be specified. If multiple root directories are specified, they appear under
