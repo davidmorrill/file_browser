@@ -1,6 +1,8 @@
 File Browser Web App
 --------------------
 
+![File Browser 1](https://cloud.githubusercontent.com/assets/213759/4261801/da0a45ae-3b7e-11e4-9a3b-3c2026c8d10f.png)
+
 This is a simple app I wrote to get some experience writing web apps using Dart.
 As such it may be of limited or no use to anyone else, but I am making it
 available as an example for others to study or use as desired.
@@ -23,8 +25,6 @@ The app is divided into two parts:
 
 Some annotated screen shots of the web app running under Dartium are shown
 below:
-
-![File Browser 1](https://cloud.githubusercontent.com/assets/213759/4261801/da0a45ae-3b7e-11e4-9a3b-3c2026c8d10f.png)
 
 ![File Browser 2](https://cloud.githubusercontent.com/assets/213759/4261799/da07df4e-3b7e-11e4-9394-2bcebb3a400a.png)
 
