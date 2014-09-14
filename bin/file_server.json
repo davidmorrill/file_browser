@@ -8,8 +8,6 @@
     ".scss", ".styl", ".txt", ".xml", ".yaml"
   ],
   "roots": [
-    "..",
-    "/Users/dmorrill/Dart/dart-sdk",
-    "/Users/dmorrill/Dropbox/github/facets"
+    ".."
   ]
 }
